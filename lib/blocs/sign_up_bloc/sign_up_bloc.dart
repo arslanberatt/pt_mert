@@ -19,7 +19,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       try {
         MyUser user = await _userRepository.signUp(event.user, event.password);
         await _userRepository.setUserData(user);
-        emit(SignUpSucces());
+        emit(SignUpSuccess());
       } catch (e) {
         log(e.toString());
         emit(SignUpFailure());
