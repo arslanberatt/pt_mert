@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pt_mert/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:pt_mert/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:pt_mert/screens/home/home_screen.dart';
@@ -26,7 +27,6 @@ class MyAppView extends StatelessWidget {
               ),
               child: const HomeScreen(),
             );
-            // return HomeScreen();
           } else {
             return BlocProvider(
               create: (context) => SignInBloc(
@@ -36,10 +36,12 @@ class MyAppView extends StatelessWidget {
               ),
               child: const SignInScreen(),
             );
-            // return SignInScreen();
           }
         },
       ),
+      locale: const Locale('tr', 'TR'),
+      supportedLocales: const [Locale('tr', 'TR'), Locale('en', 'US')],
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
     );
   }
 }
