@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "979584192014",
+    "project_id": "ptmert-cffcb",
+    "storage_bucket": "ptmert-cffcb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:979584192014:android:b113e6ab4955f34791765f",
+        "android_client_info": {
+          "package_name": "com.example.pt_mert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAERofxiKw4ERpLdu3kf9Wo-9Wvzij-nCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
