@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:pt_mert/components/date_input.dart';
 import 'package:pt_mert/components/text_field.dart';
 
-class CustomerScreen extends StatelessWidget {
+class CustomerScreen extends StatefulWidget {
   const CustomerScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final nameController = TextEditingController();
-    final phoneController = TextEditingController();
-    final trainingCountController = TextEditingController();
-    final notesController = TextEditingController();
-    final paymentController = TextEditingController();
+  State<CustomerScreen> createState() => _CustomerScreenState();
+}
 
+class _CustomerScreenState extends State<CustomerScreen> {
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final trainingCountController = TextEditingController();
+  final notesController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Yeni Öğrenci Kaydı"),
@@ -22,14 +26,17 @@ class CustomerScreen extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
+            /// Ad Soyad
             MyTextField(
               controller: nameController,
-              hintText: "Adınızı giriniz",
+              hintText: "Ad Soyad",
               obscureText: false,
               keyboardType: TextInputType.name,
               prefixIcon: const Icon(Icons.person_outline),
             ),
             const SizedBox(height: 16),
+
+            /// Telefon
             MyTextField(
               controller: phoneController,
               hintText: "Telefon numarası",
@@ -38,14 +45,18 @@ class CustomerScreen extends StatelessWidget {
               prefixIcon: const Icon(Icons.phone),
             ),
             const SizedBox(height: 16),
+
+            /// Antrenman Sayısı
             MyTextField(
               controller: trainingCountController,
-              hintText: "Örn: 5",
+              hintText: "Antrenman Sayısı (örn: 5)",
               obscureText: false,
               keyboardType: TextInputType.number,
               prefixIcon: const Icon(Icons.fitness_center),
             ),
             const SizedBox(height: 16),
+
+            /// Notlar
             TextField(
               controller: notesController,
               maxLines: 3,
@@ -57,21 +68,15 @@ class CustomerScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
-            MyTextField(
-              controller: paymentController,
-              hintText: "Toplam Ödeme (₺)",
-              obscureText: false,
-              keyboardType: TextInputType.number,
-              prefixIcon: const Icon(Icons.attach_money),
-            ),
-            const SizedBox(height: 16),
-            CustomDateTimePicker(onDateTimeSelected: (DateTime selected) {}),
+
+            const SizedBox(height: 24),
+
+            /// Kaydet Butonu
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // TODO: Kaydet
+                  // TODO: Modelin oluşturulup veritabanına kaydedilmesi
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
