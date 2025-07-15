@@ -28,7 +28,7 @@ class MyUserEntity extends Equatable {
 
   @override
   String toString() {
-    return '''UserEntity: {
+    return ''' UserEntity:{
     id: $id
     email: $email
     name: $name

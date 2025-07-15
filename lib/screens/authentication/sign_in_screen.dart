@@ -76,7 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   SizedBox(height: AppSizes.spacingL),
                   MyTextField(
                     controller: emailController,
-                    hintText: 'Email',
+                    label: Text('Email'),
                     obscureText: false,
                     keyboardType: TextInputType.emailAddress,
                     prefixIcon: Icon(Icons.person_outline),
@@ -94,7 +94,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   SizedBox(height: AppSizes.spacingM),
                   MyTextField(
                     controller: passwordController,
-                    hintText: 'Şifre',
+                    label: Text('Şifre'),
                     obscureText: obscurePassword,
                     keyboardType: TextInputType.visiblePassword,
                     prefixIcon: Icon(Icons.lock_outline),

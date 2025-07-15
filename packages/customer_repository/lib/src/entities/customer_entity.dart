@@ -65,16 +65,15 @@ class CustomerEntity extends Equatable {
 
   @override
   String toString() {
-    return '''
-CustomerEntity(
-  customerId: $customerId,
-  name: $name,
-  phone: $phone,
-  createdAt: $createdAt,
-  trainingCount: $trainingCount,
-  lastTrainingDate: $lastTrainingDate,
-  note: $note,
-  isActive: $isActive
-)''';
+    return ''' CustomerEntity: {
+      customerId: $customerId
+      name: $name
+      phone: $phone
+      createdAt: $createdAt
+      trainingCount: $trainingCount
+      lastTrainingDate: $lastTrainingDate
+      note: $note
+      isActive: $isActive
+    }''';
   }
 }

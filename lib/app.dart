@@ -20,6 +20,7 @@ class MainApp extends StatelessWidget {
         BlocProvider<SignUpBloc>(
           create: (_) => SignUpBloc(userRepository: userRepository),
         ),
+
         BlocProvider(
           create: (context) =>
               MyUserBloc(

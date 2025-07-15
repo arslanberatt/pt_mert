@@ -77,7 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(height: AppSizes.spacingL),
                   MyTextField(
                     controller: nameController,
-                    hintText: 'İsim',
+                    label: Text('İsim'),
                     obscureText: false,
                     keyboardType: TextInputType.name,
                     prefixIcon: Icon(Icons.person_outline),
@@ -92,7 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(height: AppSizes.spacingM),
                   MyTextField(
                     controller: emailController,
-                    hintText: 'Email',
+                    label: Text('Email'),
                     obscureText: false,
                     keyboardType: TextInputType.emailAddress,
                     prefixIcon: Icon(Icons.email_outlined),
@@ -108,7 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(height: AppSizes.spacingM),
                   MyTextField(
                     controller: passwordController,
-                    hintText: 'Şifre',
+                    label: Text('Şifre'),
                     obscureText: obscurePassword,
                     keyboardType: TextInputType.visiblePassword,
                     prefixIcon: Icon(Icons.lock_outline),
@@ -135,7 +135,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(height: AppSizes.spacingM),
                   MyTextField(
                     controller: confirmPasswordController,
-                    hintText: 'Şifreyi Tekrar Girin',
+                    label: Text('Şifre'),
                     obscureText: obscurePassword,
                     keyboardType: TextInputType.visiblePassword,
                     prefixIcon: Icon(Icons.lock_reset_outlined),

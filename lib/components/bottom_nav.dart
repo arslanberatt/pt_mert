@@ -18,6 +18,7 @@ class CustomBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     final iconList = <IconData>[
       Icons.dashboard_outlined,
+      Icons.add_rounded,
       Icons.settings_outlined,
     ];
 
@@ -26,14 +27,15 @@ class CustomBottomNav extends StatelessWidget {
       children: [
         AnimatedBottomNavigationBar(
           icons: iconList,
+          iconSize: 28,
           activeIndex: currentIndex,
+          borderColor: AppColors.inputFieldColor,
+          borderWidth: 1,
           onTap: onTap,
-          gapLocation: GapLocation.center,
+          gapLocation: GapLocation.none,
           notchSmoothness: NotchSmoothness.softEdge,
-          leftCornerRadius: 36,
-          rightCornerRadius: 36,
-          backgroundColor: AppColors.primaryColor,
-          activeColor: AppColors.backgroundColor,
+          backgroundColor: AppColors.backgroundColor,
+          activeColor: AppColors.blackTextColor,
           inactiveColor: AppColors.inputFieldColor,
           splashColor: AppColors.backgroundColor,
         ),

@@ -2,16 +2,16 @@ import 'package:equatable/equatable.dart';
 import '../entities/entities.dart';
 
 class Customer extends Equatable {
-  final String customerId;
-  final String name;
-  final String phone;
-  final DateTime createdAt;
-  final int trainingCount;
-  final DateTime? lastTrainingDate;
-  final String? note;
-  final bool isActive;
+  String customerId;
+  String name;
+  String phone;
+  DateTime createdAt;
+  int trainingCount;
+  DateTime? lastTrainingDate;
+  String? note;
+  bool isActive;
 
-  const Customer({
+  Customer({
     required this.customerId,
     required this.name,
     required this.phone,
@@ -95,4 +95,18 @@ class Customer extends Equatable {
     note,
     isActive,
   ];
+
+  @override
+  String toString() {
+    return ''' Customer: {
+      customerId: $customerId
+      name: $name
+      phone: $phone
+      createdAt: $createdAt
+      trainingCount: $trainingCount
+      lastTrainingDate: $lastTrainingDate
+      note: $note
+      isActive: $isActive
+    }''';
+  }
 }

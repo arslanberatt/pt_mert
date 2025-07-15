@@ -1,5 +1,45 @@
+import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:customer_repository/src/entities/entities.dart';
+import 'package:customer_repository/src/models/customer.dart';
+import 'package:uuid/uuid.dart';
+
 import 'customer_repo.dart';
 
-class FirebaseCustomerRepository implements CustomerRepository{
+class FirebaseCustomerRepository implements CustomerRepository {
+  final customersCollection = FirebaseFirestore.instance.collection(
+    'customers',
+  );
+  @override
+  Future<Customer> createCustomer(Customer customer) async {
+    try {
+      customer.customerId = Uuid().v1();
+      customer.createdAt = DateTime.now();
+      customer.lastTrainingDate = null;
 
+      customersCollection
+          .doc(customer.customerId)
+          .set(customer.toEntity().toDocument());
+      return customer;
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Customer>> getCustomer() {
+    try {
+      return customersCollection.get().then(
+        (value) => value.docs
+            .map(
+              (e) => Customer.fromEntity(CustomerEntity.fromDocument(e.data())),
+            )
+            .toList(),
+      );
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
 }

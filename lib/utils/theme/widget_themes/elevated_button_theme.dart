@@ -5,16 +5,16 @@ class CustomElevatedButtonTheme {
   static final light = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       elevation: 0,
-      backgroundColor: AppColors.primaryTextColor,
-      foregroundColor: Colors.white,
-      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+      backgroundColor: AppColors.blackTextColor, // Siyah gibi görünüm
+      foregroundColor: Colors.white, // Yazı rengi beyaz
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 32),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(50), // Tam oval görünüm
+        borderRadius: BorderRadius.circular(12), // Görsele yakın oval
       ),
       textStyle: const TextStyle(
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w700, // Bold
         fontSize: 15,
-        letterSpacing: 0.3,
+        letterSpacing: 0.5,
       ),
     ),
   );
