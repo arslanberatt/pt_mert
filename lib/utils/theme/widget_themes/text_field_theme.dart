@@ -5,28 +5,27 @@ class CustomTextFieldTheme {
 
   static InputDecorationTheme lightTextFieldTheme = InputDecorationTheme(
     filled: true,
-    fillColor: const Color(0xFFF3F4F6),
-    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+    fillColor: const Color(0xFFF5F5F5), // Hafif gri arka plan
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(50),
-      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide.none, // Border yok gibi
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(50),
+      borderRadius: BorderRadius.circular(12),
       borderSide: BorderSide.none,
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(50),
-      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(color: Colors.black.withOpacity(0.4), width: 1),
     ),
-    prefixIconColor: Colors.grey.shade500,
-    hintStyle: TextStyle(
-      color: Colors.grey.shade500,
-      fontWeight: FontWeight.w400,
-    ),
+    hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 14),
     labelStyle: const TextStyle(
       color: Colors.black,
       fontWeight: FontWeight.w500,
+      fontSize: 15,
     ),
+    prefixIconColor: Colors.grey.shade500,
+    suffixIconColor: Colors.grey.shade400,
   );
 }

@@ -33,7 +33,7 @@ class FirebaseUserRepository implements UserRepository {
   @override
   Future<void> signIn(String email, String password) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -91,7 +91,7 @@ class FirebaseUserRepository implements UserRepository {
 
   @override
   Stream<User?> get user {
-    return _firebaseAuth.authStateChanges().map((firebaseUser){
+    return _firebaseAuth.authStateChanges().map((firebaseUser) {
       final user = firebaseUser;
       return user;
     });

@@ -12,6 +12,7 @@ class AppColors {
   static const Color hintTextColor = Color(0xFFAAAAAA); // eski gray3Color
   static const Color borderColor = Color(0xFFBBBBBB); // eski gray4Color
   static const Color blackTextColor = Color(0xFF151522);
+  static const Color hardGrayTextColor = Color.fromARGB(255, 81, 80, 80);
 
   // Primary / Accent
   static const Color primaryColor = Color(0xFFD73B3E); // kırmızı ton

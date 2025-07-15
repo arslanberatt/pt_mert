@@ -18,7 +18,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(SignInProcess());
       try {
         await _userRepository.signIn(event.email, event.password);
-        emit(SignInSucces());
+        emit(SignInSuccess());
       } catch (e) {
         log(e.toString());
         emit(const SignInFailure());

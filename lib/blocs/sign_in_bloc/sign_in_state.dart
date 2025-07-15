@@ -10,7 +10,7 @@ abstract class SignInState extends Equatable {
 
 final class SignInInitial extends SignInState {}
 
-final class SignInSucces extends SignInState {}
+final class SignInSuccess extends SignInState {}
 final class SignInFailure extends SignInState {
   final String? message;
 
