@@ -4,4 +4,6 @@ abstract class CustomerRepository {
   Future<Customer> createCustomer(Customer customer);
 
   Future<List<Customer>> getCustomer();
+
+  Future<Customer> updateCustomer(Customer customer);
 }

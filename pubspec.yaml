@@ -18,10 +18,10 @@ dependencies:
 
   user_repository:
     path: packages/user_repository
-  lesson_package_repository:
-    path: packages/lesson_package_repository
   customer_repository:
     path: packages/customer_repository
+  appointment_repository:
+    path: packages/appointment_repository
 
   flutter_localizations:
     sdk: flutter

@@ -10,7 +10,8 @@ class CustomDateTimePicker extends StatefulWidget {
     super.key,
     this.initialDate,
     required this.onDateTimeSelected,
-    this.title = "Tarih", DateTime? initialValue,
+    this.title = "Tarih",
+    DateTime? initialValue,
   });
 
   @override
@@ -39,7 +40,10 @@ class _CustomDateTimePickerState extends State<CustomDateTimePicker> {
     return ListTile(
       title: Text(widget.title),
       subtitle: Text(_formatDateTime(_selectedDateTime)),
-      trailing: const Icon(Icons.calendar_today_rounded),
+      trailing: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Icon(Icons.calendar_today_rounded),
+      ),
       onTap: () async {
         final pickedDate = await showDatePicker(
           context: context,

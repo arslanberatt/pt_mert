@@ -2,7 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pt_mert/cubits/main_navigation_cubit.dart';
-import 'package:pt_mert/screens/home/appointment_screen.dart';
+import 'package:pt_mert/screens/customer/customer_list_appointment_screen.dart';
 import 'package:pt_mert/screens/home/home_screen.dart';
 import 'package:pt_mert/screens/setting/setting_screen.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
@@ -20,10 +20,13 @@ class MainNavigationPage extends StatelessWidget {
 }
 
 class _MainNavigationView extends StatelessWidget {
-  const _MainNavigationView({super.key});
+  const _MainNavigationView();
 
-  static final _pages = [HomeScreen(), AppointmentScreen(), SettingsScreen()];
-
+  static final _pages = [
+    HomeScreen(),
+    CustomerListAppointmentScreen(),
+    SettingsScreen(),
+  ];
   static final _icons = [Icons.home, Icons.add, Icons.settings];
 
   @override

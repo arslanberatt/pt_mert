@@ -7,7 +7,7 @@ part 'create_customer_state.dart';
 
 class CreateCustomerBloc
     extends Bloc<CreateCustomerEvent, CreateCustomerState> {
-  CustomerRepository _customerRepository;
+  final CustomerRepository _customerRepository;
 
   CreateCustomerBloc({required CustomerRepository customerRepository})
     : _customerRepository = customerRepository,
@@ -24,4 +24,4 @@ class CreateCustomerBloc
       }
     });
   }
-}
+} 

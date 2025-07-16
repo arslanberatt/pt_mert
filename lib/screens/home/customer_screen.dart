@@ -77,7 +77,6 @@ class _CustomerScreenState extends State<CustomerScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
                 MyTextField(
                   controller: _phoneController,
                   label: Text('Telefon'),
@@ -91,7 +90,6 @@ class _CustomerScreenState extends State<CustomerScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
                 MyTextField(
                   controller: _trainingCountController,
                   label: Text('Antrenman Sayısı'),
@@ -106,7 +104,6 @@ class _CustomerScreenState extends State<CustomerScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
                 TextFormField(
                   controller: _notesController,
                   maxLines: 2,

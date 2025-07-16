@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import '../entities/entities.dart';
 
+// ignore: must_be_immutable
 class Customer extends Equatable {
   String customerId;
   String name;
