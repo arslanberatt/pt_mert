@@ -42,4 +42,17 @@ class FirebaseCustomerRepository implements CustomerRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<Customer> updateCustomer(Customer customer) async {
+    try {
+      await customersCollection
+          .doc(customer.customerId)
+          .update(customer.toEntity().toDocument());
+      return customer;
+    } catch (e) {
+      log("[ERROR][updateCustomer] ${e.toString()}");
+      rethrow;
+    }
+  }
 }

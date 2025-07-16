@@ -1,3 +1,5 @@
+import 'package:appointment_repository/appointment_repository.dart';
+import 'package:customer_repository/customer_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,5 +14,11 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Bloc.observer = SimpleBlocObserver();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(MainApp(FirebaseUserRepository()));
+  runApp(
+    MainApp(
+      FirebaseUserRepository(),
+      FirebaseAppointmentRepository(),
+      FirebaseCustomerRepository(),
+    ),
+  );
 }

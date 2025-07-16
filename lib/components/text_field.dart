@@ -13,6 +13,7 @@ class MyTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final String? errorMsg;
   final String? Function(String?)? onChanged;
+  final double spacing;
 
   const MyTextField({
     super.key,
@@ -21,6 +22,7 @@ class MyTextField extends StatelessWidget {
     required this.obscureText,
     required this.keyboardType,
     this.hintText,
+    this.spacing = 16,
     this.suffixIcon,
     this.onTap,
     this.prefixIcon,
@@ -32,21 +34,26 @@ class MyTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      obscureText: obscureText,
-      keyboardType: keyboardType,
-      focusNode: focusNode,
-      onTap: onTap,
-      onChanged: onChanged,
-      validator: validator,
-      decoration: InputDecoration(
-        hintText: hintText,
-        label: label,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        errorText: errorMsg,
-      ),
+    return Column(
+      children: [
+        TextFormField(
+          controller: controller,
+          obscureText: obscureText,
+          keyboardType: keyboardType,
+          focusNode: focusNode,
+          onTap: onTap,
+          onChanged: onChanged,
+          validator: validator,
+          decoration: InputDecoration(
+            hintText: hintText,
+            label: label,
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
+            errorText: errorMsg,
+          ),
+        ),
+        SizedBox(height: spacing),
+      ],
     );
   }
 }

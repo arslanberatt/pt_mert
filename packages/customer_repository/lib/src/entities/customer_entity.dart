@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class CustomerEntity extends Equatable {
@@ -41,11 +42,9 @@ class CustomerEntity extends Equatable {
       customerId: doc['customerId'] as String? ?? '',
       name: doc['name'] as String? ?? '',
       phone: doc['phone'] as String? ?? '',
-      createdAt: DateTime.parse(doc['createdAt']),
+      createdAt: (doc['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       trainingCount: doc['trainingCount'] as int? ?? 0,
-      lastTrainingDate: doc['lastTrainingDate'] != null
-          ? DateTime.tryParse(doc['lastTrainingDate'])
-          : null,
+      lastTrainingDate: (doc['lastTrainingDate'] as Timestamp?)?.toDate(),
       note: doc['note'] as String?,
       isActive: doc['isActive'] as bool? ?? true,
     );
