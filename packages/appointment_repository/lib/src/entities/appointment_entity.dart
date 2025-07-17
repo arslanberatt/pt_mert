@@ -5,15 +5,15 @@ import 'package:customer_repository/customer_repository.dart';
 import 'package:equatable/equatable.dart';
 
 class AppointmentEntity extends Equatable {
-  final String appointmentId;
-  final Customer customer;
-  final DateTime date;
-  final String status;
-  final double? price;
-  final bool notified15MinBefore;
-  final DateTime createdAt;
+  String appointmentId;
+  Customer customer;
+  DateTime date;
+  String status;
+  double? price;
+  bool notified15MinBefore;
+  DateTime createdAt;
 
-  const AppointmentEntity({
+  AppointmentEntity({
     required this.appointmentId,
     required this.customer,
     required this.date,
@@ -39,7 +39,7 @@ class AppointmentEntity extends Equatable {
     return AppointmentEntity(
       appointmentId: doc['appointmentId'] as String? ?? '',
       customer: Customer.fromEntity(
-        CustomerEntity.fromDocument(doc['customer'] as Map<String, dynamic>),
+        CustomerEntity.fromDocument(doc['customer']),
       ),
       date: (doc['date'] as Timestamp).toDate(),
       status: doc['status'] as String? ?? 'pending',

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:pt_mert/blocs/get_customer_bloc/get_customer_bloc.dart';
-import 'package:pt_mert/screens/customer/update_customer.dart';
-import 'package:pt_mert/screens/customer/widgets/customer_add.dart';
+import 'package:pt_mert/components/classic_appbar.dart';
+import 'package:pt_mert/screens/customer/update_customer_screen.dart';
+import 'package:pt_mert/screens/customer/widgets/customer_add_icon.dart';
 
 class CustomerUpdateListScreen extends StatefulWidget {
   const CustomerUpdateListScreen({super.key});
@@ -31,13 +32,7 @@ class _CustomerUpdateListScreenState extends State<CustomerUpdateListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "PT Mert",
-          style: TextStyle(fontWeight: FontWeight.w400),
-        ),
-        actions: [CustomerAddWidget()],
-      ),
+      appBar: ClassicAppBar(action: CustomerAddWidget()),
       body: Column(
         children: [
           Padding(

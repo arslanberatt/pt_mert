@@ -4,15 +4,15 @@ import '../entities/entities.dart';
 import './appointment_status.dart';
 
 class Appointment extends Equatable {
-  final String appointmentId;
-  final Customer customer;
-  final DateTime date;
-  final AppointmentStatus status;
-  final double? price;
-  final bool notified15MinBefore;
-  final DateTime createdAt;
+  String appointmentId;
+  Customer customer;
+  DateTime date;
+  AppointmentStatus status;
+  double? price;
+  bool notified15MinBefore;
+  DateTime createdAt;
 
-  const Appointment({
+  Appointment({
     required this.appointmentId,
     required this.customer,
     required this.date,
@@ -67,7 +67,7 @@ class Appointment extends Equatable {
     );
   }
 
-  static Appointment fromEntity(AppointmentEntity entity, Customer customer) {
+  static Appointment fromEntity(AppointmentEntity entity) {
     return Appointment(
       appointmentId: entity.appointmentId,
       customer: entity.customer,

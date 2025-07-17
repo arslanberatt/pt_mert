@@ -1,6 +1,7 @@
 import 'package:customer_repository/customer_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pt_mert/components/classic_appbar.dart';
 import 'package:pt_mert/components/date_input.dart';
 import 'package:pt_mert/components/text_field.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
@@ -72,12 +73,7 @@ class _UpdateCustomerScreenState extends State<UpdateCustomerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "PT Mert",
-          style: TextStyle(fontWeight: FontWeight.w400),
-        ),
-      ),
+      appBar: ClassicAppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -115,14 +111,6 @@ class _UpdateCustomerScreenState extends State<UpdateCustomerScreen> {
               },
             ),
             const SizedBox(height: AppSizes.spacingM),
-            // Row(
-            //   children: [
-            //     Expanded(
-            //       child: Text("Son Antrenman: ${formatDate(selectedDate)}"),
-            //     ),
-            //     TextButton(onPressed: pickDate, child: const Text("Tarih Seç")),
-            //   ],
-            // ),
             SwitchListTile(
               title: const Text("Aktif Üyelik"),
               value: _isActive,

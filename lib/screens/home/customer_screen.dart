@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:customer_repository/customer_repository.dart';
 import 'package:pt_mert/blocs/create_customer_bloc/create_customer_bloc.dart';
+import 'package:pt_mert/blocs/get_customer_bloc/get_customer_bloc.dart';
+import 'package:pt_mert/components/classic_appbar.dart';
 import 'package:pt_mert/components/text_field.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
 
@@ -31,6 +33,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
         isActive: _isActive,
       );
       context.read<CreateCustomerBloc>().add(CreateCustomer(customer));
+      context.read<GetCustomerBloc>().add(GetCustomer());
     }
   }
 
@@ -51,13 +54,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "PT Mert",
-            style: TextStyle(fontWeight: FontWeight.w400),
-          ),
-          centerTitle: true,
-        ),
+        appBar: ClassicAppBar(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
           child: Form(

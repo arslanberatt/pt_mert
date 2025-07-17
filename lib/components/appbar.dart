@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
 import 'package:pt_mert/utils/constants/sizes.dart';
-import 'package:pt_mert/screens/customer/widgets/customer_add.dart';
+import 'package:pt_mert/screens/customer/widgets/customer_add_icon.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});

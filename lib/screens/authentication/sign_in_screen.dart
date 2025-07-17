@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pt_mert/blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'package:pt_mert/components/classic_appbar.dart';
 import 'package:pt_mert/components/strings.dart';
 import 'package:pt_mert/components/text_field.dart';
 import 'package:pt_mert/screens/authentication/sign_up_screen.dart';
@@ -43,6 +44,7 @@ class _SignInScreenState extends State<SignInScreen> {
         }
       },
       child: Scaffold(
+        appBar: ClassicAppBar(),
         backgroundColor: AppColors.backgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(

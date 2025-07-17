@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pt_mert/blocs/sign_up_bloc/sign_up_bloc.dart';
+import 'package:pt_mert/components/classic_appbar.dart';
 import 'package:pt_mert/components/strings.dart';
 import 'package:pt_mert/components/text_field.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
@@ -44,7 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: ClassicAppBar(),
         backgroundColor: AppColors.backgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(

@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:customer_repository/customer_repository.dart';
 import 'package:appointment_repository/appointment_repository.dart';
 import 'package:pt_mert/blocs/create_appointment_bloc/create_appointment_bloc.dart';
+import 'package:pt_mert/components/classic_appbar.dart';
+import 'package:pt_mert/components/section_tile.dart';
 import 'package:pt_mert/components/table_calendar.dart';
 import 'package:pt_mert/components/text_field.dart';
+import 'package:pt_mert/cubits/main_navigation_cubit.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
 import 'package:intl/intl.dart';
 
@@ -39,14 +42,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         );
         return;
       }
-
       final appointment = Appointment.empty.copyWith(
         customer: widget.initialCustomer!,
         date: _appointmentDateTime,
         price: double.tryParse(_priceController.text.trim()),
         notified15MinBefore: _notified15MinBefore,
       );
-
       context.read<CreateAppointmentBloc>().add(CreateAppointment(appointment));
     }
   }
@@ -61,7 +62,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text("Randevu başarıyla kaydedildi!")),
               );
-              Navigator.pop(context);
+              Navigator.pop(context, true);
+              context.read<MainNavigationCubit>().changeTab(0);
             } else if (state is CreateAppointmentFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("Randevu oluşturulurken hata oluştu")),
@@ -71,13 +73,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         ),
       ],
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "PT Mert",
-            style: TextStyle(fontWeight: FontWeight.w400),
-          ),
-          centerTitle: true,
-        ),
+        appBar: ClassicAppBar(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(8),
           child: Form(
@@ -95,22 +91,19 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
+                SectionTile(
+                  icon: Icons.calendar_today_outlined,
+                  title: widget.initialCustomer!.name,
+                  subtitle: DateFormat(
+                    'd MMMM y, HH:mm',
+                    'tr_TR',
+                  ).format(_appointmentDateTime),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.initialCustomer!.name,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      Text(
-                        DateFormat(
-                          'd MMMM y, HH:mm',
-                          'tr_TR',
-                        ).format(_appointmentDateTime),
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
                       const SizedBox(height: 16),
                       MyTextField(
                         controller: _priceController,
