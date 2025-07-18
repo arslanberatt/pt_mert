@@ -53,20 +53,23 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
     Customer customer,
   ) async {
     try {
-      log(
-        "[updateAppointmentStatus] Updating $appointmentId to ${status.value}",
-      );
-
       await appointmentsCollection.doc(appointmentId).update({
         "status": status.value,
       });
 
       await customersCollection.doc(customer.customerId).update({
-        "trainingCount": customer.trainingCount - 1,
-        ...customer.toEntity().toDocument(),
+        ...customer
+            .copyWith(
+              trainingCount: customer.trainingCount > 0
+                  ? customer.trainingCount - 1
+                  : 0,
+              lastTrainingDate: appointment.date,
+            )
+            .toEntity()
+            .toDocument(),
       });
     } catch (e) {
-      log("[ERROR][updateAppointmentStatus] ${e.toString()}");
+      log(e.toString());
       rethrow;
     }
   }

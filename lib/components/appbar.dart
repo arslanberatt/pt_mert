@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pt_mert/screens/transaction/create_transaction_screen.dart';
+import 'package:pt_mert/screens/transaction/widgets/setting_add_icon.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
 import 'package:pt_mert/utils/constants/sizes.dart';
 import 'package:pt_mert/screens/customer/widgets/customer_add_icon.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  final Widget? action;
+  const CustomAppBar({super.key, this.action});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -23,9 +26,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
-        CustomerAddWidget(),
+        ?action,
         SizedBox(width: AppSizes.spacingM),
-        Icon(Icons.add_circle, color: Colors.black87),
+        SettingAddWidget(),
         SizedBox(width: AppSizes.spacingS),
       ],
     );

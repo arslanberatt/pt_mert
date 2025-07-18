@@ -1,4 +1,5 @@
 import 'package:appointment_repository/appointment_repository.dart';
+import 'package:customer_repository/customer_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -10,7 +11,9 @@ import 'package:pt_mert/components/section_tile.dart';
 import 'package:pt_mert/components/section_title.dart';
 import 'package:pt_mert/components/shimmer.dart';
 import 'package:pt_mert/components/table_calendar.dart';
+import 'package:pt_mert/cubits/apointment/update_appointment_cubit.dart';
 import 'package:pt_mert/screens/appointment/appointment_detail_screen.dart';
+import 'package:pt_mert/screens/customer/widgets/customer_add_icon.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
 import 'package:pt_mert/components/today.dart';
 import 'package:pt_mert/utils/constants/sizes.dart';
@@ -46,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: const CustomAppBar(),
+      appBar: CustomAppBar(action: CustomerAddWidget()),
       body: Padding(
         padding: const EdgeInsets.all(AppSizes.paddingPage),
         child: Column(
@@ -125,17 +128,27 @@ class _HomeScreenState extends State<HomeScreen> {
                             final updatedAppointment = await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => AppointmentDetailScreen(
-                                  appointment: appointment,
+                                builder: (_) => BlocProvider(
+                                  create: (_) => UpdateAppointmentCubit(
+                                    appointment: appointment,
+                                    repository: FirebaseAppointmentRepository(),
+                                    customer: appointment.customer,
+                                  ),
+                                  child: AppointmentDetailScreen(),
                                 ),
                               ),
                             );
-
                             if (updatedAppointment != null) {
                               await FirebaseAppointmentRepository()
                                   .updateAppointment(updatedAppointment);
                               context.read<GetAppointmentBloc>().add(
                                 GetAppointment(),
+                              );
+                              await FirebaseCustomerRepository().updateCustomer(
+                                appointment.customer,
+                              );
+                              context.read<GetCustomerBloc>().add(
+                                GetCustomer(),
                               );
                             }
                           },

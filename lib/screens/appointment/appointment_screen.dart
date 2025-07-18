@@ -8,7 +8,6 @@ import 'package:pt_mert/components/section_tile.dart';
 import 'package:pt_mert/components/table_calendar.dart';
 import 'package:pt_mert/components/text_field.dart';
 import 'package:pt_mert/cubits/main_navigation_cubit.dart';
-import 'package:pt_mert/utils/constants/colors.dart';
 import 'package:intl/intl.dart';
 
 class AppointmentScreen extends StatefulWidget {
@@ -107,7 +106,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                       const SizedBox(height: 16),
                       MyTextField(
                         controller: _priceController,
-                        label: const Text('Fiyat (isteğe bağlı)'),
+                        label: const Text('Fiyat (Opsiyonel)'),
                         obscureText: false,
                         keyboardType: TextInputType.number,
                         prefixIcon: const Icon(Icons.attach_money),
@@ -124,17 +123,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     ],
                   ),
                 ),
-                SwitchListTile(
-                  title: const Text("15 dk Önce Bildir"),
-                  value: _notified15MinBefore,
-                  onChanged: (val) =>
-                      setState(() => _notified15MinBefore = val),
-                  activeColor: AppColors.blackTextColor,
-                  activeTrackColor: AppColors.hardGrayTextColor,
-                  inactiveThumbColor: AppColors.blackTextColor,
-                  inactiveTrackColor: AppColors.inputFieldColor,
-                ),
-                const SizedBox(height: 24),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(

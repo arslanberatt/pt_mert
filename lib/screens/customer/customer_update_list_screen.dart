@@ -91,6 +91,7 @@ class _CustomerUpdateListScreenState extends State<CustomerUpdateListScreen> {
                           }
                         },
                         child: ListTile(
+                          contentPadding: EdgeInsets.all(8),
                           leading: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(

@@ -8,7 +8,7 @@ import 'package:pt_mert/blocs/get_customer_bloc/get_customer_bloc.dart';
 import 'package:pt_mert/components/appbar.dart';
 import 'package:pt_mert/cubits/main_navigation_cubit.dart';
 import 'package:pt_mert/screens/appointment/appointment_screen.dart';
-
+import 'package:pt_mert/screens/customer/widgets/customer_add_icon.dart';
 
 class CustomerListAppointmentScreen extends StatefulWidget {
   const CustomerListAppointmentScreen({super.key});
@@ -36,7 +36,7 @@ class _CustomerListAppointmentScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(action: CustomerAddWidget()),
       body: Column(
         children: [
           Padding(
@@ -94,9 +94,7 @@ class _CustomerListAppointmentScreenState
                                               FirebaseAppointmentRepository(),
                                         ),
                                       ),
-                                      BlocProvider.value(
-                                        value: mainNavCubit,
-                                      ), // 👈 bu önemliF
+                                      BlocProvider.value(value: mainNavCubit),
                                     ],
                                     child: AppointmentScreen(
                                       initialCustomer: customer,
@@ -110,18 +108,21 @@ class _CustomerListAppointmentScreenState
                             );
                           }
                         },
-                        child: ListTile(
-                          leading: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(12),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: ListTile(
+                            leading: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade200,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(Icons.person_outline, size: 24),
                             ),
-                            child: const Icon(Icons.person_outline, size: 24),
-                          ),
-                          title: Text(customer.name),
-                          subtitle: Text(
-                            "Başlangıç: ${formatDate(customer.createdAt)}",
+                            title: Text(customer.name),
+                            subtitle: Text(
+                              "Son Antrenman: ${customer.lastTrainingDate != null ? formatDate(customer.lastTrainingDate!) : "Henüz belirlenmedi"}",
+                            ),
                           ),
                         ),
                       );

@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pt_mert/blocs/create_customer_bloc/create_customer_bloc.dart';
 import 'package:pt_mert/blocs/get_customer_bloc/get_customer_bloc.dart';
-import 'package:pt_mert/components/appbar.dart';
+import 'package:pt_mert/components/classic_appbar.dart';
 import 'package:pt_mert/components/section_tile.dart';
 import 'package:pt_mert/components/section_title.dart';
 import 'package:pt_mert/screens/customer/customer_update_list_screen.dart';
 import 'package:pt_mert/screens/home/customer_screen.dart';
+import 'package:pt_mert/screens/home/transaction_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: ClassicAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
@@ -54,7 +54,7 @@ class SettingsScreen extends StatelessWidget {
                           create: (context) => CreateCustomerBloc(
                             customerRepository: FirebaseCustomerRepository(),
                           ),
-                          child: CustomerScreen(),
+                          child: TransactionsScreen(),
                         ),
                   ),
                 );

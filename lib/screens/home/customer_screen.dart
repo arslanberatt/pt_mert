@@ -41,7 +41,6 @@ class _CustomerScreenState extends State<CustomerScreen> {
   Widget build(BuildContext context) {
     return BlocListener<CreateCustomerBloc, CreateCustomerState>(
       listener: (context, state) {
-        // Güzel Bi Get.SnackBar getirilmesi lazım
         if (state is CreateCustomerSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Öğrenci başarıyla kaydedildi!")),
