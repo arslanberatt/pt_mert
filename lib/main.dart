@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pt_mert/app.dart';
 import 'package:pt_mert/firebase_options.dart';
 import 'package:pt_mert/simple_bloc_observer.dart';
+import 'package:transaction_repository/transaction_repository.dart';
 import 'package:user_repository/user_repository.dart';
 
 void main() async {
@@ -19,6 +20,7 @@ void main() async {
       FirebaseUserRepository(),
       FirebaseAppointmentRepository(),
       FirebaseCustomerRepository(),
+      FirebaseTransactionRepository(),
     ),
   );
 }

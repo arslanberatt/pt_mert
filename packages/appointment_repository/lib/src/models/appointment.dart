@@ -4,21 +4,19 @@ import '../entities/entities.dart';
 import './appointment_status.dart';
 
 class Appointment extends Equatable {
-  final String appointmentId;
-  final Customer customer;
-  final DateTime date;
-  final AppointmentStatus status;
-  final double? price;
-  final bool notified15MinBefore;
-  final DateTime createdAt;
+  String appointmentId;
+  Customer customer;
+  DateTime date;
+  AppointmentStatus status;
+  double? price;
+  DateTime createdAt;
 
-  const Appointment({
+  Appointment({
     required this.appointmentId,
     required this.customer,
     required this.date,
     this.status = AppointmentStatus.pending,
     this.price,
-    this.notified15MinBefore = false,
     required this.createdAt,
   });
 
@@ -28,7 +26,6 @@ class Appointment extends Equatable {
     DateTime? date,
     AppointmentStatus? status,
     double? price,
-    bool? notified15MinBefore,
     DateTime? createdAt,
   }) {
     return Appointment(
@@ -37,7 +34,6 @@ class Appointment extends Equatable {
       date: date ?? this.date,
       status: status ?? this.status,
       price: price ?? this.price,
-      notified15MinBefore: notified15MinBefore ?? this.notified15MinBefore,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -48,7 +44,6 @@ class Appointment extends Equatable {
     date: DateTime.now(),
     status: AppointmentStatus.pending,
     price: 0,
-    notified15MinBefore: false,
     createdAt: DateTime.now(),
   );
 
@@ -62,19 +57,17 @@ class Appointment extends Equatable {
       date: date,
       status: status.value,
       price: price,
-      notified15MinBefore: notified15MinBefore,
       createdAt: createdAt,
     );
   }
 
-  static Appointment fromEntity(AppointmentEntity entity, Customer customer) {
+  static Appointment fromEntity(AppointmentEntity entity) {
     return Appointment(
       appointmentId: entity.appointmentId,
       customer: entity.customer,
       date: entity.date,
       status: AppointmentStatus.fromString(entity.status),
       price: entity.price,
-      notified15MinBefore: entity.notified15MinBefore,
       createdAt: entity.createdAt,
     );
   }
@@ -86,7 +79,6 @@ class Appointment extends Equatable {
     date,
     status,
     price,
-    notified15MinBefore,
     createdAt,
   ];
 
@@ -98,7 +90,6 @@ class Appointment extends Equatable {
       date: $date
       status: $status
       price: $price
-      notified15MinBefore: $notified15MinBefore
       createdAt: $createdAt
     }''';
   }

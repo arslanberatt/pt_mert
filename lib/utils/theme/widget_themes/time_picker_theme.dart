@@ -14,18 +14,18 @@ class CustomTimePickerTheme {
 
     // Butonlar
     cancelButtonStyle: TextButton.styleFrom(
-      foregroundColor: AppColors.primaryColor,
+      foregroundColor: AppColors.blackTextColor,
     ),
     confirmButtonStyle: TextButton.styleFrom(
-      foregroundColor: AppColors.primaryColor,
+      foregroundColor: AppColors.blackTextColor,
     ),
 
     // Saat & Dakika kutuları
     hourMinuteShape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppSizes.paddingContainerS),
     ),
-    hourMinuteColor: AppColors.primaryColor.withOpacity(0.12),
-    hourMinuteTextColor: AppColors.primaryColor,
+    hourMinuteColor: AppColors.blackTextColor.withOpacity(0.12),
+    hourMinuteTextColor: AppColors.blackTextColor,
     hourMinuteTextStyle: const TextStyle(
       fontSize: 36,
       fontWeight: FontWeight.bold,
@@ -36,9 +36,9 @@ class CustomTimePickerTheme {
     dayPeriodShape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppSizes.paddingContainerS),
     ),
-    dayPeriodBorderSide: BorderSide(color: AppColors.primaryColor),
-    dayPeriodColor: AppColors.primaryColor.withOpacity(0.12),
-    dayPeriodTextColor: AppColors.primaryColor,
+    dayPeriodBorderSide: BorderSide(color: AppColors.blackTextColor),
+    dayPeriodColor: AppColors.blackTextColor.withOpacity(0.12),
+    dayPeriodTextColor: AppColors.blackTextColor,
     dayPeriodTextStyle: const TextStyle(
       fontSize: 14,
       color: AppColors.hintTextColor,
@@ -53,7 +53,7 @@ class CustomTimePickerTheme {
     ),
 
     // Giriş modu ikonu ve yardım yazısı
-    entryModeIconColor: AppColors.primaryColor,
+    entryModeIconColor: AppColors.blackTextColor,
     helpTextStyle: const TextStyle(
       fontSize: 14,
       color: AppColors.hintTextColor,
@@ -65,14 +65,14 @@ class CustomTimePickerTheme {
         borderRadius: BorderRadius.circular(AppSizes.paddingContainerS),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.primaryColor),
+        borderSide: BorderSide(color: AppColors.blackTextColor),
         borderRadius: BorderRadius.circular(AppSizes.paddingContainerS),
       ),
     ),
 
     // Saat & dakika ayırıcı
     timeSelectorSeparatorColor: MaterialStateProperty.all(
-      AppColors.primaryColor,
+      AppColors.blackTextColor,
     ),
     timeSelectorSeparatorTextStyle: MaterialStateProperty.all(
       const TextStyle(fontWeight: FontWeight.bold),

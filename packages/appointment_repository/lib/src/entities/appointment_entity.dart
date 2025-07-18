@@ -5,21 +5,19 @@ import 'package:customer_repository/customer_repository.dart';
 import 'package:equatable/equatable.dart';
 
 class AppointmentEntity extends Equatable {
-  final String appointmentId;
-  final Customer customer;
-  final DateTime date;
-  final String status;
-  final double? price;
-  final bool notified15MinBefore;
-  final DateTime createdAt;
+  String appointmentId;
+  Customer customer;
+  DateTime date;
+  String status;
+  double? price;
+  DateTime createdAt;
 
-  const AppointmentEntity({
+  AppointmentEntity({
     required this.appointmentId,
     required this.customer,
     required this.date,
     required this.status,
     this.price,
-    this.notified15MinBefore = false,
     required this.createdAt,
   });
 
@@ -30,7 +28,6 @@ class AppointmentEntity extends Equatable {
       'date': date,
       'status': status,
       'price': price,
-      'notified15MinBefore': notified15MinBefore,
       'createdAt': createdAt,
     };
   }
@@ -39,12 +36,11 @@ class AppointmentEntity extends Equatable {
     return AppointmentEntity(
       appointmentId: doc['appointmentId'] as String? ?? '',
       customer: Customer.fromEntity(
-        CustomerEntity.fromDocument(doc['customer'] as Map<String, dynamic>),
+        CustomerEntity.fromDocument(doc['customer']),
       ),
       date: (doc['date'] as Timestamp).toDate(),
       status: doc['status'] as String? ?? 'pending',
       price: (doc['price'] as num?)?.toDouble(),
-      notified15MinBefore: doc['notified15MinBefore'] as bool? ?? false,
       createdAt: (doc['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
@@ -56,7 +52,6 @@ class AppointmentEntity extends Equatable {
     date,
     status,
     price,
-    notified15MinBefore,
     createdAt,
   ];
 
@@ -68,7 +63,6 @@ class AppointmentEntity extends Equatable {
       date: $date
       status: $status
       price: $price
-      notified15MinBefore: $notified15MinBefore
       createdAt: $createdAt
     }''';
   }

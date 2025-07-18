@@ -2,7 +2,7 @@ import 'package:customer_repository/customer_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pt_mert/blocs/create_customer_bloc/create_customer_bloc.dart';
-import 'package:pt_mert/screens/home/customer_screen.dart';
+import 'package:pt_mert/screens/customer/customer_screen.dart';
 
 class CustomerAddWidget extends StatelessWidget {
   const CustomerAddWidget({super.key});

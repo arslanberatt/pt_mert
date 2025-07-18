@@ -1,10 +1,20 @@
+import 'package:appointment_repository/appointment_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:pt_mert/blocs/get_appointment_bloc/get_appointment_bloc.dart';
+import 'package:pt_mert/blocs/get_customer_bloc/get_customer_bloc.dart';
+import 'package:pt_mert/blocs/get_transaction_bloc/get_transaction_bloc.dart';
+import 'package:pt_mert/blocs/log_out_bloc/log_out_bloc.dart';
 import 'package:pt_mert/blocs/my_user_bloc/my_user_bloc.dart';
 import 'package:pt_mert/components/appbar.dart';
+import 'package:pt_mert/components/section_tile.dart';
+import 'package:pt_mert/components/section_title.dart';
 import 'package:pt_mert/components/shimmer.dart';
 import 'package:pt_mert/components/table_calendar.dart';
+import 'package:pt_mert/cubits/apointment/update_appointment_cubit.dart';
+import 'package:pt_mert/screens/appointment/appointment_detail_screen.dart';
+import 'package:pt_mert/screens/customer/widgets/customer_add_icon.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
 import 'package:pt_mert/components/today.dart';
 import 'package:pt_mert/utils/constants/sizes.dart';
@@ -19,157 +29,159 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   DateTime _currentSelectedDay = DateTime.now();
-  List<Map<String, String>> _allAppointments = [
-    {
-      "name": "Berat Arslan",
-      "package": "6. ders",
-      "time": "09:00 - 10:00",
-      "date": "2025-07-16",
-    },
-    {
-      "name": "Kübranur Demir",
-      "package": "10. ders",
-      "time": "10:00 - 11:00",
-      "date": "2025-07-16",
-    },
-    {
-      "name": "Tuğba Demir",
-      "package": "1. ders",
-      "time": "13:00 - 14:00",
-      "date": "2025-07-17",
-    },
-    {
-      "name": "Şevval Ümit",
-      "package": "2. ders",
-      "time": "16:00 - 17:00",
-      "date": "2025-07-16",
-    },
-    {
-      "name": "Medine Nur Kara",
-      "package": "3. ders",
-      "time": "17:00 - 18:00",
-      "date": "2025-07-17",
-    },
-  ];
 
-  List<Map<String, String>> _getAppointmentsForDay(DateTime day) {
-    return _allAppointments.where((appointment) {
-      try {
-        DateTime appointmentDate = DateTime.parse(appointment["date"]!);
-        return isSameDay(appointmentDate, day);
-      } catch (e) {
-        print("Randevu tarihi format hatası: ${appointment["date"]}");
-        return false;
-      }
+  List<Appointment> _getAppointmentsForDay(
+    List<Appointment> appointments,
+    DateTime day,
+  ) {
+    return appointments.where((appointment) {
+      return isSameDay(appointment.date, day);
     }).toList();
   }
 
   @override
-  Widget build(BuildContext context) {
-    final appointmentsForSelectedDay = _getAppointmentsForDay(
-      _currentSelectedDay,
-    );
+  void initState() {
+    super.initState();
+    context.read<GetCustomerBloc>().add(GetCustomer());
+    context.read<GetAppointmentBloc>().add(GetAppointment());
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: const CustomAppBar(),
+      appBar: CustomAppBar(action: CustomerAddWidget()),
       body: Padding(
         padding: const EdgeInsets.all(AppSizes.paddingPage),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BlocBuilder<MyUserBloc, MyUserState>(
-                  builder: (context, state) {
-                    if (state.status == MyUserStatus.success) {
-                      return Text(
-                        'Hoşgeldin, ${state.user!.name}',
-                        style: Theme.of(context).textTheme.headlineSmall
-                            ?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
-                      );
-                    } else {
-                      return const ShimmerWidget(width: 200, height: 28);
-                    }
-                  },
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  getFormattedTodayInTurkish(),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
+            BlocBuilder<MyUserBloc, MyUserState>(
+              builder: (context, state) {
+                if (state.status == MyUserStatus.success) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Hoşgeldin, ${state.user!.name}',
+                            style: Theme.of(context).textTheme.headlineSmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            getFormattedTodayInTurkish(),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          context.read<LogOutBloc>().add(LogOutRequested());
+                        },
+                        icon: const Icon(Icons.logout),
+                      ),
+                    ],
+                  );
+                } else {
+                  return const ShimmerWidget(width: 200, height: 28);
+                }
+              },
             ),
             const SizedBox(height: 32),
-            // HomeScreen için CustomCalendarWidget kullanımı
             CustomCalendarWidget(
-              initialSelectedDay:
-                  _currentSelectedDay, // Başlangıçta bugünü seçili göster
+              initialSelectedDay: _currentSelectedDay,
               onDaySelectedForView: (selectedDay) {
                 setState(() {
-                  _currentSelectedDay = selectedDay; // Seçilen günü güncelle
+                  _currentSelectedDay = selectedDay;
                 });
               },
             ),
             const SizedBox(height: 12),
-            Text(
-              'Randevular (${DateFormat('d MMMM y', 'tr_TR').format(_currentSelectedDay)})',
-              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+            SectionTitle(
+              title:
+                  'Randevular - ${DateFormat('d MMMM y', 'tr_TR').format(_currentSelectedDay)}',
             ),
             const SizedBox(height: 8),
             Expanded(
-              child: appointmentsForSelectedDay.isEmpty
-                  ? Center(
-                      child: Text(
-                        'Bu güne ait randevu bulunmamaktadır.',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    )
-                  : ListView.builder(
+              child: BlocBuilder<GetAppointmentBloc, GetAppointmentState>(
+                builder: (context, state) {
+                  if (state is GetAppointmentLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (state is GetAppointmentFailure) {
+                    return const Center(child: Text("Randevular yüklenemedi."));
+                  }
+                  if (state is GetAppointmentSuccess) {
+                    final appointmentsForSelectedDay = _getAppointmentsForDay(
+                      state.appointments,
+                      _currentSelectedDay,
+                    );
+                    if (appointmentsForSelectedDay.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'Bu güne ait randevu bulunmamaktadır.',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      );
+                    }
+
+                    return ListView.builder(
                       itemCount: appointmentsForSelectedDay.length,
                       itemBuilder: (context, index) {
                         final appointment = appointmentsForSelectedDay[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    appointment["name"]!,
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.bodyLarge,
+                        return GestureDetector(
+                          onTap: () async {
+                            final updatedAppointment = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => BlocProvider(
+                                  create: (_) => UpdateAppointmentCubit(
+                                    appointment: appointment,
+                                    repository: FirebaseAppointmentRepository(),
+                                    customer: appointment.customer,
                                   ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    "Paket: ${appointment["package"]}",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.grey.shade600,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                ],
-                              ),
-                              Text(
-                                appointment["time"]!,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                                  child: AppointmentDetailScreen(),
                                 ),
                               ),
-                            ],
+                            );
+
+                            if (updatedAppointment != null) {
+                              context.read<GetAppointmentBloc>().add(
+                                GetAppointment(),
+                              );
+                              context.read<GetCustomerBloc>().add(
+                                GetCustomer(),
+                              );
+                              context.read<GetTransactionBloc>().add(
+                                GetTransaction(),
+                              );
+                            }
+                          },
+                          child: SectionTile(
+                            title: appointment.customer.name,
+                            subtitle: appointment.status.value,
+                            icon: Icons.calendar_today,
+                            trailing: Text(
+                              DateFormat("HH:mm").format(appointment.date),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ),
                         );
                       },
-                    ),
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
+              ),
             ),
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pt_mert/blocs/sign_up_bloc/sign_up_bloc.dart';
+import 'package:pt_mert/components/classic_appbar.dart';
 import 'package:pt_mert/components/strings.dart';
 import 'package:pt_mert/components/text_field.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
@@ -44,7 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: ClassicAppBar(),
         backgroundColor: AppColors.backgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(
@@ -55,9 +56,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                    child: Image.asset('assets/images/logo.png', height: 220),
+                    child: Image.asset(
+                      'assets/images/boxing-logo.jpg',
+                      height: 220,
+                    ),
                   ),
-                  SizedBox(height: AppSizes.spacingXL),
                   Text(
                     'Kayıt Ol',
                     style: TextStyle(
@@ -89,7 +92,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  SizedBox(height: AppSizes.spacingM),
                   MyTextField(
                     controller: emailController,
                     label: Text('Email'),
@@ -105,7 +107,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  SizedBox(height: AppSizes.spacingM),
                   MyTextField(
                     controller: passwordController,
                     label: Text('Şifre'),
@@ -132,7 +133,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       icon: Icon(iconPassword),
                     ),
                   ),
-                  SizedBox(height: AppSizes.spacingM),
                   MyTextField(
                     controller: confirmPasswordController,
                     label: Text('Şifre'),

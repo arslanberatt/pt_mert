@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:pt_mert/blocs/get_customer_bloc/get_customer_bloc.dart';
-import 'package:pt_mert/screens/customer/update_customer.dart';
-import 'package:pt_mert/screens/customer/widgets/customer_add.dart';
+import 'package:pt_mert/components/classic_appbar.dart';
+import 'package:pt_mert/screens/customer/update_customer_screen.dart';
+import 'package:pt_mert/screens/customer/widgets/customer_add_icon.dart';
 
 class CustomerUpdateListScreen extends StatefulWidget {
   const CustomerUpdateListScreen({super.key});
@@ -31,13 +32,7 @@ class _CustomerUpdateListScreenState extends State<CustomerUpdateListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "PT Mert",
-          style: TextStyle(fontWeight: FontWeight.w400),
-        ),
-        actions: [CustomerAddWidget()],
-      ),
+      appBar: ClassicAppBar(action: CustomerAddWidget()),
       body: Column(
         children: [
           Padding(
@@ -95,18 +90,21 @@ class _CustomerUpdateListScreenState extends State<CustomerUpdateListScreen> {
                             context.read<GetCustomerBloc>().add(GetCustomer());
                           }
                         },
-                        child: ListTile(
-                          leading: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(12),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: ListTile(
+                            leading: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade200,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(Icons.person_outline, size: 24),
                             ),
-                            child: const Icon(Icons.person_outline, size: 24),
-                          ),
-                          title: Text(student.name),
-                          subtitle: Text(
-                            "Başlangıç: ${formatDate(student.createdAt)}",
+                            title: Text(student.name),
+                            subtitle: Text(
+                              "Başlangıç: ${formatDate(student.createdAt)}",
+                            ),
                           ),
                         ),
                       );

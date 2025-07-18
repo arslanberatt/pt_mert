@@ -30,13 +30,18 @@ class FirebaseCustomerRepository implements CustomerRepository {
   @override
   Future<List<Customer>> getCustomer() {
     try {
-      return customersCollection.get().then(
-        (value) => value.docs
+      return customersCollection.get().then((value) {
+        final customers = value.docs
             .map(
               (e) => Customer.fromEntity(CustomerEntity.fromDocument(e.data())),
             )
-            .toList(),
-      );
+            .toList();
+
+        customers.sort(
+          (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()),
+        );
+        return customers;
+      });
     } catch (e) {
       log(e.toString());
       rethrow;
@@ -51,7 +56,7 @@ class FirebaseCustomerRepository implements CustomerRepository {
           .update(customer.toEntity().toDocument());
       return customer;
     } catch (e) {
-      log("[ERROR][updateCustomer] ${e.toString()}");
+      log(e.toString());
       rethrow;
     }
   }

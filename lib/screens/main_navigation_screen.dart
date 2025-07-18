@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pt_mert/cubits/main_navigation_cubit.dart';
 import 'package:pt_mert/screens/customer/customer_list_appointment_screen.dart';
 import 'package:pt_mert/screens/home/home_screen.dart';
-import 'package:pt_mert/screens/setting/setting_screen.dart';
+import 'package:pt_mert/screens/transaction/transaction_screen.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
 
 class MainNavigationPage extends StatelessWidget {
@@ -25,9 +25,13 @@ class _MainNavigationView extends StatelessWidget {
   static final _pages = [
     HomeScreen(),
     CustomerListAppointmentScreen(),
-    SettingsScreen(),
+    TransactionsScreen(),
   ];
-  static final _icons = [Icons.home, Icons.add, Icons.settings];
+  static final _icons = [
+    Icons.home,
+    Icons.add,
+    Icons.account_balance_wallet_rounded,
+  ];
 
   @override
   Widget build(BuildContext context) {

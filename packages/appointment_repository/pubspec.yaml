@@ -20,6 +20,8 @@ dependencies:
     path: ../user_repository
   customer_repository:
     path: ../customer_repository
+  transaction_repository:
+    path: ../transaction_repository
 
 dev_dependencies:
   flutter_test:

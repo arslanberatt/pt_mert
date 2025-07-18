@@ -17,7 +17,12 @@ class AppColors {
   // Primary / Accent
   static const Color primaryColor = Color(0xFFD73B3E); // kırmızı ton
   static const Color todayColor = Color(0xFFB2BDC3CB); // kırmızı ton
-  static const Color selectedDayColor = Color.fromARGB(255, 36, 36, 37); // kırmızı ton
+  static const Color selectedDayColor = Color.fromARGB(
+    255,
+    36,
+    36,
+    37,
+  ); // kırmızı ton
 
   // Gradients
   static const Gradient darkGradient = LinearGradient(
@@ -37,7 +42,7 @@ class AppColors {
   );
 
   static const Gradient accentGradient = LinearGradient(
-    colors: <Color>[primaryColor, hintTextColor],
+    colors: <Color>[blackTextColor, hintTextColor],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );

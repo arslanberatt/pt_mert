@@ -1,10 +1,14 @@
+import 'package:appointment_repository/appointment_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:pt_mert/blocs/create_appointment_bloc/create_appointment_bloc.dart';
+import 'package:pt_mert/blocs/get_appointment_bloc/get_appointment_bloc.dart';
 import 'package:pt_mert/blocs/get_customer_bloc/get_customer_bloc.dart';
+import 'package:pt_mert/components/appbar.dart';
+import 'package:pt_mert/cubits/main_navigation_cubit.dart';
 import 'package:pt_mert/screens/appointment/appointment_screen.dart';
-import 'package:pt_mert/screens/customer/update_customer.dart';
-import 'package:pt_mert/screens/customer/widgets/customer_add.dart';
+import 'package:pt_mert/screens/customer/widgets/customer_add_icon.dart';
 
 class CustomerListAppointmentScreen extends StatefulWidget {
   const CustomerListAppointmentScreen({super.key});
@@ -26,19 +30,13 @@ class _CustomerListAppointmentScreenState
   @override
   void initState() {
     super.initState();
-    context.read<GetCustomerBloc>().add(GetCustomer()); // Müşterileri yükle
+    context.read<GetCustomerBloc>().add(GetCustomer());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "PT Mert",
-          style: TextStyle(fontWeight: FontWeight.w400),
-        ),
-        actions: [CustomerAddWidget()],
-      ),
+      appBar: CustomAppBar(action: CustomerAddWidget()),
       body: Column(
         children: [
           Padding(
@@ -81,40 +79,50 @@ class _CustomerListAppointmentScreenState
                     itemBuilder: (context, index) {
                       final customer = filteredCustomers[index];
                       return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
+                        onTap: () async {
+                          final mainNavCubit = context
+                              .read<MainNavigationCubit>();
+                          final result = await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) =>
-                                  AppointmentScreen(initialCustomer: customer),
+                              builder: (BuildContext context) =>
+                                  MultiBlocProvider(
+                                    providers: [
+                                      BlocProvider(
+                                        create: (_) => CreateAppointmentBloc(
+                                          appointmentRepository:
+                                              FirebaseAppointmentRepository(),
+                                        ),
+                                      ),
+                                      BlocProvider.value(value: mainNavCubit),
+                                    ],
+                                    child: AppointmentScreen(
+                                      initialCustomer: customer,
+                                    ),
+                                  ),
                             ),
                           );
-                        },
-                        onLongPress: () async {
-                          final updatedCustomer = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  UpdateCustomerScreen(customer: customer),
-                            ),
-                          );
-
-                          if (updatedCustomer != null) {
-                            context.read<GetCustomerBloc>().add(GetCustomer());
+                          if (result == true) {
+                            context.read<GetAppointmentBloc>().add(
+                              GetAppointment(),
+                            );
                           }
                         },
-                        child: ListTile(
-                          leading: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(12),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: ListTile(
+                            leading: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade200,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(Icons.person_outline, size: 24),
                             ),
-                            child: const Icon(Icons.person_outline, size: 24),
-                          ),
-                          title: Text(customer.name),
-                          subtitle: Text(
-                            "Başlangıç: ${formatDate(customer.createdAt)}",
+                            title: Text(customer.name),
+                            subtitle: Text(
+                              "Son Antrenman: ${customer.lastTrainingDate != null ? formatDate(customer.lastTrainingDate!) : "Henüz belirlenmedi"}",
+                            ),
                           ),
                         ),
                       );

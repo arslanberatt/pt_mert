@@ -1,8 +1,7 @@
 enum AppointmentStatus {
-  pending('pending'),
-  completed('completed'),
-  cancelled('cancelled'),
-  missed('missed');
+  pending('Beklemede'),
+  completed('Tamamlandı'),
+  cancelled('İptal edildi');
 
   final String value;
   const AppointmentStatus(this.value);

@@ -13,7 +13,7 @@ class CustomTheme {
     brightness: Brightness.light,
     useMaterial3: true,
     fontFamily: 'Poppins',
-    primaryColor: AppColors.primaryColor,
+    primaryColor: AppColors.blackTextColor,
     scaffoldBackgroundColor: AppColors.backgroundColor,
 
     appBarTheme: CustomAppBarTheme.light,

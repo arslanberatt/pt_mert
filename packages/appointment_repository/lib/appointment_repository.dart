@@ -1,4 +1,4 @@
-library customer_repository;
+library appointment_repository;
 
 export 'src/models/models.dart';
 export 'src/entities/entities.dart';

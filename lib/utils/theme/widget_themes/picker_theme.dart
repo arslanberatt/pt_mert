@@ -13,7 +13,7 @@ class CustomDatePickerTheme {
     ),
 
     // Header
-    headerBackgroundColor: AppColors.primaryColor,
+    headerBackgroundColor: AppColors.blackTextColor,
     headerForegroundColor: Colors.white,
     headerHeadlineStyle: const TextStyle(
       color: Colors.white,
@@ -27,13 +27,13 @@ class CustomDatePickerTheme {
     ),
 
     // Weekdays & Days
-    weekdayStyle: const TextStyle(color: AppColors.primaryColor),
+    weekdayStyle: const TextStyle(color: AppColors.blackTextColor),
     dayStyle: const TextStyle(color: AppColors.primaryTextColor),
     dayForegroundColor: WidgetStateProperty.all(AppColors.primaryTextColor),
     dayBackgroundColor: WidgetStateProperty.all(Colors.transparent),
     dayOverlayColor: WidgetStateProperty.all(
       // ignore: deprecated_member_use
-      AppColors.primaryColor.withOpacity(0.12),
+      AppColors.blackTextColor.withOpacity(0.12),
     ),
     dayShape: WidgetStateProperty.all(
       RoundedRectangleBorder(
@@ -44,7 +44,7 @@ class CustomDatePickerTheme {
     // Today
     todayForegroundColor: WidgetStateProperty.all(Colors.white),
     todayBackgroundColor: WidgetStateProperty.all(AppColors.inputFieldColor),
-    todayBorder: const BorderSide(color: AppColors.primaryColor),
+    todayBorder: const BorderSide(color: AppColors.blackTextColor),
 
     // Year
     yearStyle: const TextStyle(color: AppColors.primaryTextColor, fontSize: 14),
@@ -52,7 +52,7 @@ class CustomDatePickerTheme {
     yearBackgroundColor: WidgetStateProperty.all(Colors.transparent),
     yearOverlayColor: WidgetStateProperty.all(
       // ignore: deprecated_member_use
-      AppColors.primaryColor.withOpacity(0.12),
+      AppColors.blackTextColor.withOpacity(0.12),
     ),
     yearShape: WidgetStateProperty.all(
       RoundedRectangleBorder(
@@ -68,7 +68,7 @@ class CustomDatePickerTheme {
     rangePickerShape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppSizes.paddingContainerM),
     ),
-    rangePickerHeaderBackgroundColor: AppColors.primaryColor,
+    rangePickerHeaderBackgroundColor: AppColors.blackTextColor,
     rangePickerHeaderForegroundColor: Colors.white,
     rangePickerHeaderHeadlineStyle: const TextStyle(
       color: Colors.white,
@@ -81,10 +81,10 @@ class CustomDatePickerTheme {
       fontWeight: FontWeight.w400,
     ),
     // ignore: deprecated_member_use
-    rangeSelectionBackgroundColor: AppColors.primaryColor.withOpacity(0.24),
+    rangeSelectionBackgroundColor: AppColors.blackTextColor.withOpacity(0.24),
     rangeSelectionOverlayColor: WidgetStateProperty.all(
       // ignore: deprecated_member_use
-      AppColors.primaryColor.withOpacity(0.12),
+      AppColors.blackTextColor.withOpacity(0.12),
     ),
 
     // Divider & Input
@@ -94,17 +94,17 @@ class CustomDatePickerTheme {
         borderRadius: BorderRadius.circular(AppSizes.paddingContainerS),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.primaryColor),
+        borderSide: const BorderSide(color: AppColors.blackTextColor),
         borderRadius: BorderRadius.circular(AppSizes.paddingContainerS),
       ),
     ),
 
     // Buttons
     cancelButtonStyle: TextButton.styleFrom(
-      foregroundColor: AppColors.primaryColor,
+      foregroundColor: AppColors.blackTextColor,
     ),
     confirmButtonStyle: TextButton.styleFrom(
-      foregroundColor: AppColors.primaryColor,
+      foregroundColor: AppColors.blackTextColor,
     ),
 
     // Locale

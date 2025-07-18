@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pt_mert/blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'package:pt_mert/components/classic_appbar.dart';
 import 'package:pt_mert/components/strings.dart';
 import 'package:pt_mert/components/text_field.dart';
 import 'package:pt_mert/screens/authentication/sign_up_screen.dart';
@@ -43,6 +44,7 @@ class _SignInScreenState extends State<SignInScreen> {
         }
       },
       child: Scaffold(
+        appBar: ClassicAppBar(),
         backgroundColor: AppColors.backgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(
@@ -52,11 +54,14 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: AppSizes.spacingXL),
+                  SizedBox(height: AppSizes.spacingM),
                   Center(
-                    child: Image.asset('assets/images/logo.png', height: 220),
+                    child: Image.asset(
+                      'assets/images/boxing-logo.jpg',
+                      height: 220,
+                    ),
                   ),
-                  SizedBox(height: AppSizes.spacingXL),
+                  SizedBox(height: AppSizes.spacingM),
                   Text(
                     'Giriş',
                     style: TextStyle(
@@ -91,7 +96,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       }
                     },
                   ),
-                  SizedBox(height: AppSizes.spacingM),
                   MyTextField(
                     controller: passwordController,
                     label: Text('Şifre'),
@@ -122,7 +126,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       icon: Icon(iconPassword),
                     ),
                   ),
-                  SizedBox(height: AppSizes.spacingM),
                   !signInRequired
                       ? SizedBox(
                           width: double.infinity,
@@ -161,7 +164,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: Text(
                           "Kayıt Ol",
                           style: TextStyle(
-                            color: AppColors.primaryColor,
+                            color: AppColors.blackTextColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
