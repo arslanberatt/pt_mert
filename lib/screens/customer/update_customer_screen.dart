@@ -1,6 +1,8 @@
 import 'package:customer_repository/customer_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:pt_mert/blocs/get_customer_bloc/get_customer_bloc.dart';
 import 'package:pt_mert/components/classic_appbar.dart';
 import 'package:pt_mert/components/date_input.dart';
 import 'package:pt_mert/components/text_field.dart';
@@ -22,7 +24,7 @@ class _UpdateCustomerScreenState extends State<UpdateCustomerScreen> {
   late TextEditingController _noteController;
   late TextEditingController _trainingCountController;
   DateTime? _selectedDate;
-  bool _isActive = true;
+  bool? _isActive;
 
   @override
   void initState() {
@@ -63,6 +65,7 @@ class _UpdateCustomerScreenState extends State<UpdateCustomerScreen> {
       isActive: _isActive,
     );
     Navigator.pop(context, updatedCustomer);
+    context.read<GetCustomerBloc>().add(GetCustomer());
   }
 
   String formatDate(DateTime? date) {
@@ -107,13 +110,13 @@ class _UpdateCustomerScreenState extends State<UpdateCustomerScreen> {
               title: 'Son Antrenman',
               initialDate: _selectedDate,
               onDateTimeSelected: (selected) {
-                formatDate(_selectedDate);
+                setState(() => _selectedDate = selected);
               },
             ),
             const SizedBox(height: AppSizes.spacingM),
             SwitchListTile(
               title: const Text("Aktif Üyelik"),
-              value: _isActive,
+              value: _isActive!,
               onChanged: (value) => setState(() => _isActive = value),
               activeColor: AppColors.blackTextColor,
               activeTrackColor: AppColors.hardGrayTextColor,

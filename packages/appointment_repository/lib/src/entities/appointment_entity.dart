@@ -10,7 +10,6 @@ class AppointmentEntity extends Equatable {
   DateTime date;
   String status;
   double? price;
-  bool notified15MinBefore;
   DateTime createdAt;
 
   AppointmentEntity({
@@ -19,7 +18,6 @@ class AppointmentEntity extends Equatable {
     required this.date,
     required this.status,
     this.price,
-    this.notified15MinBefore = false,
     required this.createdAt,
   });
 
@@ -30,7 +28,6 @@ class AppointmentEntity extends Equatable {
       'date': date,
       'status': status,
       'price': price,
-      'notified15MinBefore': notified15MinBefore,
       'createdAt': createdAt,
     };
   }
@@ -44,7 +41,6 @@ class AppointmentEntity extends Equatable {
       date: (doc['date'] as Timestamp).toDate(),
       status: doc['status'] as String? ?? 'pending',
       price: (doc['price'] as num?)?.toDouble(),
-      notified15MinBefore: doc['notified15MinBefore'] as bool? ?? false,
       createdAt: (doc['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
@@ -56,7 +52,6 @@ class AppointmentEntity extends Equatable {
     date,
     status,
     price,
-    notified15MinBefore,
     createdAt,
   ];
 
@@ -68,7 +63,6 @@ class AppointmentEntity extends Equatable {
       date: $date
       status: $status
       price: $price
-      notified15MinBefore: $notified15MinBefore
       createdAt: $createdAt
     }''';
   }

@@ -1,9 +1,11 @@
 import 'dart:developer';
 import 'package:appointment_repository/src/models/appointment_status.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' hide Transaction;
 import 'package:uuid/uuid.dart';
 import 'package:customer_repository/customer_repository.dart';
 import 'package:appointment_repository/appointment_repository.dart';
+import 'package:transaction_repository/transaction_repository.dart';
+import 'package:transaction_repository/src/models/transaction_type.dart';
 
 class FirebaseAppointmentRepository implements AppointmentRepository {
   final appointmentsCollection = FirebaseFirestore.instance.collection(
@@ -53,6 +55,7 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
     Customer customer,
   ) async {
     try {
+      // 1. Randevu durumunu güncelle
       await appointmentsCollection.doc(appointmentId).update({
         "status": status.value,
       });
@@ -68,6 +71,18 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
             .toEntity()
             .toDocument(),
       });
+
+      if ((appointment.price ?? 0) > 0) {
+        final transaction = Transaction(
+          transactionId: const Uuid().v4(),
+          title: 'Randevu - ${customer.name}',
+          amount: appointment.price!,
+          type: TransactionType.income,
+          createdAt: DateTime.now(),
+          isActive: true,
+        );
+        await FirebaseTransactionRepository().createTransaction(transaction);
+      }
     } catch (e) {
       log(e.toString());
       rethrow;

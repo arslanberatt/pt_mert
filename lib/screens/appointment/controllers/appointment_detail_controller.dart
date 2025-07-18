@@ -12,7 +12,9 @@ class AppointmentDetailController {
   ) async {
     final updated = appointment.copyWith(status: status);
     await appointmentRepository.updateAppointment(updated);
+    
     return updated;
+    
   }
 
   Future<Appointment> updateDate(

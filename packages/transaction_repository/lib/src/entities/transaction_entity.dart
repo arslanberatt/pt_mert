@@ -37,7 +37,10 @@ class TransactionEntity extends Equatable {
       title: doc['title'] as String? ?? '',
       amount: doc['amount'] as double? ?? 0.0,
       createdAt: (doc['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
-      type: TransactionType.expense,
+      type: TransactionType.values.firstWhere(
+        (e) => e.name == doc['type'],
+        orElse: () => TransactionType.expense,
+      ),
       isActive: doc['isActive'] as bool? ?? true,
     );
   }

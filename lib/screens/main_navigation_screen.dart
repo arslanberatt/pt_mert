@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pt_mert/cubits/main_navigation_cubit.dart';
 import 'package:pt_mert/screens/customer/customer_list_appointment_screen.dart';
 import 'package:pt_mert/screens/home/home_screen.dart';
-import 'package:pt_mert/screens/home/transaction_screen.dart';
-import 'package:pt_mert/screens/setting/setting_screen.dart';
+import 'package:pt_mert/screens/transaction/transaction_screen.dart';
 import 'package:pt_mert/utils/constants/colors.dart';
 
 class MainNavigationPage extends StatelessWidget {

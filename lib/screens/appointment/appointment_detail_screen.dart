@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:pt_mert/blocs/get_transaction_bloc/get_transaction_bloc.dart';
 import 'package:pt_mert/components/classic_appbar.dart';
 import 'package:pt_mert/components/date_input.dart';
 import 'package:pt_mert/components/section_tile.dart';
@@ -117,6 +118,9 @@ class AppointmentDetailScreen extends StatelessWidget {
                                 context
                                     .read<UpdateAppointmentCubit>()
                                     .updateStatus(AppointmentStatus.completed);
+                                context.read<GetTransactionBloc>().add(
+                                  GetTransaction(),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.black,

@@ -14,9 +14,9 @@ class GetTransactionBloc
     on<GetTransaction>((event, emit) async {
       emit(GetTransactionLoading());
       try {
-        List<Transaction> Transactions = await _transactionRepository
+        List<Transaction> transaction = await _transactionRepository
             .getTransaction();
-        emit(GetTransactionSuccess(Transactions));
+        emit(GetTransactionSuccess(transaction));
       } catch (e) {
         emit(GetTransactionFailure());
       }

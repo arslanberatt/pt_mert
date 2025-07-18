@@ -90,19 +90,21 @@ class _CustomerUpdateListScreenState extends State<CustomerUpdateListScreen> {
                             context.read<GetCustomerBloc>().add(GetCustomer());
                           }
                         },
-                        child: ListTile(
-                          contentPadding: EdgeInsets.all(8),
-                          leading: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(12),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: ListTile(
+                            leading: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade200,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(Icons.person_outline, size: 24),
                             ),
-                            child: const Icon(Icons.person_outline, size: 24),
-                          ),
-                          title: Text(student.name),
-                          subtitle: Text(
-                            "Başlangıç: ${formatDate(student.createdAt)}",
+                            title: Text(student.name),
+                            subtitle: Text(
+                              "Başlangıç: ${formatDate(student.createdAt)}",
+                            ),
                           ),
                         ),
                       );

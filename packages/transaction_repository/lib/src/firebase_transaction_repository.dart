@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart' hide Transaction;
-import 'package:transaction_repository/src/models/transaction.dart';
 import 'package:transaction_repository/transaction_repository.dart';
 import 'package:uuid/uuid.dart';
 
@@ -30,18 +29,21 @@ class FirebaseTransactionRepository implements TransactionRepository {
   @override
   Future<List<Transaction>> getTransaction() {
     try {
-      return transactionsCollection.get().then((value) {
-        final transactions = value.docs
-            .map(
-              (e) => Transaction.fromEntity(
-                TransactionEntity.fromDocument(e.data()),
-              ),
-            )
-            .toList();
+      return transactionsCollection
+          .where('isActive', isEqualTo: true)
+          .get()
+          .then((value) {
+            final transactions = value.docs
+                .map(
+                  (e) => Transaction.fromEntity(
+                    TransactionEntity.fromDocument(e.data()),
+                  ),
+                )
+                .toList();
 
-        transactions.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-        return transactions;
-      });
+            transactions.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+            return transactions;
+          });
     } catch (e) {
       log(e.toString());
       rethrow;

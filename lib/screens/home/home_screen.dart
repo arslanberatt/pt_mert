@@ -1,10 +1,11 @@
 import 'package:appointment_repository/appointment_repository.dart';
-import 'package:customer_repository/customer_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:pt_mert/blocs/get_appointment_bloc/get_appointment_bloc.dart';
 import 'package:pt_mert/blocs/get_customer_bloc/get_customer_bloc.dart';
+import 'package:pt_mert/blocs/get_transaction_bloc/get_transaction_bloc.dart';
+import 'package:pt_mert/blocs/log_out_bloc/log_out_bloc.dart';
 import 'package:pt_mert/blocs/my_user_bloc/my_user_bloc.dart';
 import 'package:pt_mert/components/appbar.dart';
 import 'package:pt_mert/components/section_tile.dart';
@@ -58,21 +59,32 @@ class _HomeScreenState extends State<HomeScreen> {
             BlocBuilder<MyUserBloc, MyUserState>(
               builder: (context, state) {
                 if (state.status == MyUserStatus.success) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Hoşgeldin, ${state.user!.name}',
-                        style: Theme.of(context).textTheme.headlineSmall
-                            ?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Hoşgeldin, ${state.user!.name}',
+                            style: Theme.of(context).textTheme.headlineSmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            getFormattedTodayInTurkish(),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        getFormattedTodayInTurkish(),
-                        style: Theme.of(context).textTheme.bodyMedium,
+                      IconButton(
+                        onPressed: () async {
+                          context.read<LogOutBloc>().add(LogOutRequested());
+                        },
+                        icon: const Icon(Icons.logout),
                       ),
                     ],
                   );
@@ -138,17 +150,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             );
+
                             if (updatedAppointment != null) {
-                              await FirebaseAppointmentRepository()
-                                  .updateAppointment(updatedAppointment);
                               context.read<GetAppointmentBloc>().add(
                                 GetAppointment(),
                               );
-                              await FirebaseCustomerRepository().updateCustomer(
-                                appointment.customer,
-                              );
                               context.read<GetCustomerBloc>().add(
                                 GetCustomer(),
+                              );
+                              context.read<GetTransactionBloc>().add(
+                                GetTransaction(),
                               );
                             }
                           },

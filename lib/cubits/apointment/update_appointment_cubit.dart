@@ -40,4 +40,5 @@ class UpdateAppointmentCubit extends Cubit<UpdateAppointmentState> {
     );
     emit(state.copyWith(appointment: updated, isLoading: false));
   }
+  
 }

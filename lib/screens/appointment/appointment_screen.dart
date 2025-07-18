@@ -23,7 +23,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   final _formKey = GlobalKey<FormState>();
   late DateTime _appointmentDateTime;
   final TextEditingController _priceController = TextEditingController();
-  bool _notified15MinBefore = true;
 
   @override
   void initState() {
@@ -45,7 +44,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         customer: widget.initialCustomer!,
         date: _appointmentDateTime,
         price: double.tryParse(_priceController.text.trim()),
-        notified15MinBefore: _notified15MinBefore,
       );
       context.read<CreateAppointmentBloc>().add(CreateAppointment(appointment));
     }
