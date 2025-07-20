@@ -13,6 +13,14 @@ class MyAppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(
+            context,
+          ).copyWith(textScaler: TextScaler.linear(1.0)),
+          child: child!,
+        );
+      },
       debugShowCheckedModeBanner: false,
       title: 'PT Mert',
       theme: CustomTheme.lightTheme,
@@ -32,29 +40,6 @@ class MyAppView extends StatelessWidget {
           }
         },
       ),
-      // home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-      //   builder: (context, state) {
-      //     if (state.status == AuthenticationStatus.authenticated) {
-      //       return BlocProvider(
-      //         create: (context) => SignInBloc(
-      //           userRepository: context
-      //               .read<AuthenticationBloc>()
-      //               .userRepository,
-      //         ),
-      //         child: const HomeScreen(),
-      //       );
-      //     } else {
-      //       return BlocProvider(
-      //         create: (context) => SignInBloc(
-      //           userRepository: context
-      //               .read<AuthenticationBloc>()
-      //               .userRepository,
-      //         ),
-      //         child: const SignInScreen(),
-      //       );
-      //     }
-      //   },
-      // ),
       locale: const Locale('tr', 'TR'),
       supportedLocales: const [Locale('tr', 'TR'), Locale('en', 'US')],
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
